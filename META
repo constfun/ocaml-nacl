@@ -1,0 +1,4 @@
+version = "0.1.0"
+description = "libsodium bindings for OCaml"
+archive(byte) = "nacl.cma"
+archive(native) = "nacl.cmxa"
