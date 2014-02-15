@@ -3,17 +3,17 @@ all:
 	ocamlfind ocamlc -c nacl_stubs.c -ccopt -fPIC -o nacl_stubs.o
 
 	# Make the dynamic and static libraries containing the stubs.
-	ocamlfind ocamlmklib nacl_stubs.o -o nacl
+	ocamlfind ocamlmklib -lsodium nacl_stubs.o -o nacl_stubs
 
 	# Make the cmi and cmo files.
 	ocamlfind ocamlc -c nacl.mli nacl.ml
 	# Make the bytecode library.
-	ocamlfind ocamlc -a -dllib -lnacl_stubs -cclib -lnacl_stubs nacl.cmo -o nacl.cma
+	ocamlfind ocamlc -a -dllib -lnacl_stubs -cclib -lnacl_stubs -cclib -lsodium nacl.cmo -o nacl.cma
 
 	# Make the cmx file.
 	ocamlopt -c nacl.ml
 	# Make the native version of the library.
-	ocamlopt -a -cclib -lnacl nacl.cmx -o nacl.cmxa
+	ocamlopt -a -cclib -lnacl_stubs -cclib -lsodium nacl.cmx -o nacl.cmxa
 	# Make a version of the library that supports being loaded by Dynlink.
 	ocamlopt -shared nacl.cmx -o nacl.cmxs
 
