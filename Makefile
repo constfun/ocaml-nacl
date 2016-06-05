@@ -18,7 +18,7 @@ all:
 	ocamlopt -shared nacl.cmx -o nacl.cmxs
 
 install:
-	ocamlfind install nacl META *.cmi *.cma *.cmxa *.cmxs *.a *.so
+	ocamlfind install nacl META *.cmi *.cma *.cmx *.cmxa *.cmxs *.a *.so
 
 uninstall:
 	ocamlfind remove nacl
